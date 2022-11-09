@@ -3,10 +3,8 @@
 namespace Descom\ImageX;
 
 use Descom\ImageX\Formats\Auto;
-use Descom\ImageX\Formats\AvifFormat;
 use Descom\ImageX\Formats\FormatContract;
 use Descom\ImageX\Formats\JpgFormat;
-use Descom\ImageX\Formats\WebpFormat;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 
