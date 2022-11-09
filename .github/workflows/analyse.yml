@@ -24,9 +24,9 @@ jobs:
       uses: actions/cache@v2
       with:
         path: vendor
-        key: ${{ runner.os }}-php-8.1-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php-v28.1-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
-          ${{ runner.os }}-php-8.1-
+          ${{ runner.os }}-php-v28.1-
     - name: Install dependencies
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: |

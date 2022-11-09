@@ -1,6 +1,6 @@
 <?php
 
-namespace Descom\ImageXTest\Test;
+namespace Descom\ImageX\Test;
 
 use Descom\ImageX\Options;
 use PHPUnit\Framework\TestCase;
