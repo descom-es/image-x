@@ -2,6 +2,11 @@
 
 namespace Descom\ImageX;
 
+use Descom\ImageX\Formats\Auto;
+use Descom\ImageX\Formats\AvifFormat;
+use Descom\ImageX\Formats\FormatContract;
+use Descom\ImageX\Formats\JpgFormat;
+use Descom\ImageX\Formats\WebpFormat;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 
@@ -9,7 +14,12 @@ final class ImageX
 {
     private Image $image;
 
-    private $format = 'jpg';
+    private ?FormatContract $format = null;
+
+    private function __construct()
+    {
+        $this->format = new JpgFormat();
+    }
 
     public static function default($key, $value): void
     {
@@ -32,6 +42,13 @@ final class ImageX
         return $self;
     }
 
+    public function auto(): self
+    {
+        $this->format = (new Auto())->detect();
+
+        return $this;
+    }
+
     public function convert(string $options): static
     {
         $options = Options::build($options);
@@ -41,12 +58,12 @@ final class ImageX
 
     public function response(string $acceptedFormats): mixed
     {
-        return $this->image->response();
+        return $this->image->response($this->format->extension());
     }
 
     public function save(string $path): void
     {
-        $this->image->save($path, null, null);
+        $this->image->save($path, null, $this->format->extension());
     }
 
     private function resize(Options $options): static

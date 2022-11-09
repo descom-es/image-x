@@ -6,31 +6,42 @@ class Header
 {
     private array $headers = [];
 
+    private static array $fakeHeaders = [];
+
     public function __construct()
     {
         $headers = [];
-        $headersOriginal = getallheaders();
+        $headersOriginal = $this->headers();
 
         array_walk(
             $headersOriginal,
             function (&$value, $key) use (&$headers) {
                 $key = strtr($key, '_ABCDEFGHIJKLMNOPQRSTUVWXYZ', '-abcdefghijklmnopqrstuvwxyz');
 
-                $headers[$key] = $item;
+                $headers[$key] = $value;
             }
         );
 
         $this->headers = $headers;
     }
 
-    public function set(string $key, string $value): void
+    public static function fake(array $headers): void
     {
-        $this->headers[$key] = $value;
+        self::$fakeHeaders = $headers;
     }
 
     public function get(string $key, ?string $default = null): ?string
     {
         return $this->headers[$this->normalizeKey($key)] ?? $default;
+    }
+
+    private function headers(): array
+    {
+        if (static::$fakeHeaders) {
+            return static::$fakeHeaders;
+        }
+
+        return getallheaders();
     }
 
     private function normalizeKey(string $key): string

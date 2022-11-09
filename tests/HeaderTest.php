@@ -15,8 +15,10 @@ class HeaderTest extends TestCase
         ];
 
         foreach ($batchTesting as $key => $value) {
+            Header::fake([$key => $value]);
+
             $header = new Header();
-            $header->set('accept', $value);
+
             $this->assertEquals($value, $header->get('accept'));
         }
     }

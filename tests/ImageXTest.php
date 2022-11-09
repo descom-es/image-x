@@ -2,6 +2,7 @@
 
 namespace Descom\ImageX\Test;
 
+use Descom\ImageX\Http\Header;
 use Descom\ImageX\ImageX;
 use Descom\ImageX\Options;
 use PHPUnit\Framework\TestCase;
@@ -30,10 +31,10 @@ class ImageXTest extends TestCase
     {
         parent::tearDown();
 
-        rmdir($this->pathTmp);
+        // rmdir($this->pathTmp);
     }
 
-    public function testDefaultValues()
+    public function testCrop()
     {
         $batchTesting = [
             [
@@ -59,6 +60,49 @@ class ImageXTest extends TestCase
 
             $this->assertEquals($testing['hash'], hash_file('sha256', $filenameTarget));
 
+            unlink($filenameTarget);
+        }
+    }
+
+    public function testFormatAuto()
+    {
+        $batchTesting = [
+            [
+                'options' => 'w_300,h_400',
+                'hash' => '293aed1f4b9073cee8851bb689dd9b075415390d45f93260dea2a18e5e1318f7',
+                'mime' => 'image/jpeg',
+                'headers' => [],
+            ],
+            [
+                'options' => 'w_300,h_400,webp',
+                'hash' => 'f38cba04087458e45e4d3e052f93879b6b1d12c9767c3f3978158115a1373e59',
+                'mime' => 'image/webp',
+                'headers' => [
+                    'accept' => 'image/webp',
+                ],
+            ],
+            [
+                'options' => 'w_300,h_400,avif',
+                'hash' => 'fcfeea0764f62a51b1f444b0735fe4b9909188ee690166b48dad8fa9107f5d8d',
+                'mime' => 'image/avif',
+                'headers' => [
+                    'accept' => 'image/avif',
+                ],
+            ],
+        ];
+
+        foreach ($batchTesting as $testing) {
+            Header::fake($testing['headers']);
+
+            $filenameTarget = $this->pathTmp.'/'.str_replace(',', '', $testing['options']).'.jpg';
+
+            ImageX::source($this->origen)
+                ->convert($testing['options'])
+                ->auto()
+                ->save($filenameTarget);
+
+            $this->assertEquals($testing['hash'], hash_file('sha256', $filenameTarget));
+            $this->assertEquals($testing['mime'], mime_content_type($filenameTarget));
             unlink($filenameTarget);
         }
     }
