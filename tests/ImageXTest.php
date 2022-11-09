@@ -19,7 +19,7 @@ class ImageXTest extends TestCase
         $this->origen = $path.'/image.jpg';
         $this->pathTmp = $path.'/tmp';
 
-        if (!file_exists($this->pathTmp)) {
+        if (! file_exists($this->pathTmp)) {
             mkdir($this->pathTmp);
         }
 
@@ -47,7 +47,7 @@ class ImageXTest extends TestCase
             [
                 'options' => 'w_600,h_300,b_FF0000',
                 'hash' => 'c6ca61d44f7b1f15e45eddfa14e013720e0f4f971c440c2ddfd9acda3db6143f',
-            ]
+            ],
         ];
 
         foreach ($batchTesting as $testing) {

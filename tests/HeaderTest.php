@@ -3,8 +3,6 @@
 namespace Descom\ImageX\Test;
 
 use Descom\ImageX\Http\Header;
-use Descom\ImageX\ImageX;
-use Descom\ImageX\Options;
 use PHPUnit\Framework\TestCase;
 
 class HeaderTest extends TestCase

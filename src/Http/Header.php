@@ -13,7 +13,7 @@ class Header
 
         array_walk(
             $headersOriginal,
-            function(&$value, $key) use (&$headers) {
+            function (&$value, $key) use (&$headers) {
                 $key = strtr($key, '_ABCDEFGHIJKLMNOPQRSTUVWXYZ', '-abcdefghijklmnopqrstuvwxyz');
 
                 $headers[$key] = $item;
