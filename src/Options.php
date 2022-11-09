@@ -2,9 +2,6 @@
 
 namespace Descom\ImageX;
 
-use Descom\ImageX\Options\Option;
-use Descom\ImageX\Options\WOption;
-
 /**
  * @property ?int $width
  * @property ?int $height
@@ -19,7 +16,7 @@ final class Options
     ];
 
     private static $defaultsValue = [
-        'backgroundColor'   => '#FFFFFF',
+        'backgroundColor' => '#FFFFFF',
     ];
 
     private function __construct(string $options)
@@ -61,7 +58,7 @@ final class Options
     public static function resets(): void
     {
         static::$defaultsValue = [
-            'backgroundColor'   => '#FFFFFF',
+            'backgroundColor' => '#FFFFFF',
         ];
     }
 

@@ -41,6 +41,4 @@ final class ImageX
     {
         $this->image->save($path, $quality, $format);
     }
-
-
 }

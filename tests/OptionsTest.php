@@ -17,7 +17,7 @@ class OptionsTest extends TestCase
     public function testDefaultValues()
     {
         $options = Options::build('');
-        $this->assertNull( $options->width);
+        $this->assertNull($options->width);
         $this->assertNull($options->height);
         $this->assertEquals('#FFFFFF', $options->backgroundColor);
 
@@ -25,7 +25,8 @@ class OptionsTest extends TestCase
             'width' => 300,
             'height' => 400,
             'backgroundColor' => '#F00',
-        ]);;
+        ]);
+        ;
         $options = Options::build('');
 
         $this->assertEquals(300, $options->width);
