@@ -3,7 +3,8 @@
     "description": "Image manipulation to web",
     "type": "library",
     "require": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "intervention/image": "^2.7"
     },
     "homepage": "https://github.com/descom-es/image-x",
     "license": "MIT",
