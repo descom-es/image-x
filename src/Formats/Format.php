@@ -18,7 +18,7 @@ abstract class Format
 
     protected function isServerSupported(): bool
     {
-        return gd_info()[$this->gdInfoKey];
+        return gd_info()[$this->gdInfoKey] ?? false;
     }
 
     protected function isBrowserSupported(): bool
