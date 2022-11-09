@@ -1,10 +1,10 @@
 <?php
 
-namespace Descom\Skeleton\Test;
+namespace Descom\ImageXTest\Test;
 
 use PHPUnit\Framework\TestCase;
 
-class SkeletonTest extends TestCase
+class ImageXTestTest extends TestCase
 {
     public function testExample()
     {

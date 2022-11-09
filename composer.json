@@ -1,11 +1,11 @@
 {
-    "name": "descom/skeleton",
-    "description": "package_description",
+    "name": "descom/image-x",
+    "description": "Image manipulation to web",
     "type": "library",
     "require": {
         "php": "^8.0"
     },
-    "homepage": "https://github.com/descom/skeleton",
+    "homepage": "https://github.com/descom-es/image-x",
     "license": "MIT",
     "authors": [
         {
@@ -28,7 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Descom\\Skeleton\\": "src"
+            "Descom\\ImageX\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Descom\\ImageX\\Tests\\": "tests"
         }
     },
     "scripts": {
