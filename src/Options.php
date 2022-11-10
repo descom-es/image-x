@@ -2,6 +2,11 @@
 
 namespace Descom\ImageX;
 
+use Descom\ImageX\Options\BackgroundColorOption;
+use Descom\ImageX\Options\HeightOption;
+use Descom\ImageX\Options\ShortDecode;
+use Descom\ImageX\Options\WidthOption;
+
 /**
  * @property ?int $width
  * @property ?int $height
@@ -10,18 +15,16 @@ namespace Descom\ImageX;
 final class Options
 {
     private array $options = [
-        'width' => null,
-        'height' => null,
-        'backgroundColor' => null,
-    ];
-
-    private static $defaultsValue = [
-        'backgroundColor' => '#FFFFFF',
+        'width' => WidthOption::class,
+        'height' => HeightOption::class,
+        'backgroundColor' => BackgroundColorOption::class,
     ];
 
     private function __construct(string $options)
     {
-        $this->decode($options);
+        $options = ShortDecode::options($options);
+
+        $this->initialize($options);
     }
 
     /**
@@ -34,33 +37,22 @@ final class Options
 
     public function __get(string $option): mixed
     {
-        return $this->options[$option]
-            ?? static::$defaultsValue[$option]
-            ?? null;
-    }
-
-    private function decode(string $options): void
-    {
-        $options = explode(',', $options);
-
-        foreach ($options as $option) {
-            $option = explode('_', $option);
-
-            if (count($option) === 2) {
-                $key = $option[0];
-                $value = $option[1];
-
-                $className = static::classOption($key);
-                if (class_exists($className)) {
-                    $class = new $className($value);
-                    $this->options[$class->name] = $class->value;
-                }
-            }
+        if (isset($this->options[$option])) {
+            return $this->options[$option]->value;
         }
+
+        return  null;
     }
 
-    private static function classOption(string $key): string
+    private function initialize(array $options)
     {
-        return 'Descom\\ImageX\\Options\\' . ucfirst($key) . 'Option';
+        foreach ($this->options as $key => $className) {
+            $optionClass = isset($options[$key])
+                ? new $className($options[$key])
+                : new $className(null);
+
+
+            $this->options[$key] = $optionClass;
+        }
     }
 }

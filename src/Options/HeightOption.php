@@ -2,9 +2,9 @@
 
 namespace Descom\ImageX\Options;
 
-class WOption extends Option
+class HeightOption extends Option
 {
-    protected string $name = 'width';
+    protected string $name = 'height';
 
     public function __construct(?string $value)
     {
