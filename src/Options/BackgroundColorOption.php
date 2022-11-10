@@ -12,7 +12,7 @@ class BackgroundColorOption extends Option
 
     public function __construct(?string $value)
     {
-        static::$defaultValue = fn() => '#FFFFFF';
+        static::$defaultValue = fn () => '#FFFFFF';
 
         $this->value = $value;
 
