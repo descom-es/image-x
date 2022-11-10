@@ -44,7 +44,7 @@ final class ImageX
         return $this->resize($options);
     }
 
-    public function response(string $acceptedFormats): mixed
+    public function response(): mixed
     {
         return $this->image->response($this->format->extension());
     }
