@@ -28,10 +28,10 @@ ImageX::defaults([
 
 $imageX = new ImageX();
 
-return ImageX::from($filename)
+return ImageX::source($filename)
     ->convert('w_200,h_200,b_000000')
     ->auto() // Auto format to image; avif, webp, jpg
-    ->stream(); // ->save($otherFilename);
+    ->response(); // ->save($otherFilename);
 ```
 
 ## Testing
