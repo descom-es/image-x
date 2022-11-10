@@ -11,7 +11,7 @@ Package to PHP to manipulate image to the web.
 Via Composer
 
 ```bash
-composer require descom/package_name
+composer require descom/image-x
 ```
 
 ## Usage
