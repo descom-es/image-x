@@ -55,7 +55,7 @@ class ImageXTest extends TestCase
             $filenameTarget = $this->pathTmp.'/'.str_replace(',', '', $testing['options']).'.jpg';
 
             ImageX::from($this->origen)
-                ->convert($testing['options'])
+                ->transform($testing['options'])
                 ->save($filenameTarget);
 
             $this->assertEquals($testing['hash'], hash_file('sha256', $filenameTarget));
@@ -94,7 +94,7 @@ class ImageXTest extends TestCase
             $filenameTarget = $this->pathTmp.'/'.str_replace(',', '', $testing['options']).'.jpg';
 
             ImageX::from($this->origen)
-                ->convert($testing['options'])
+                ->transform($testing['options'])
                 ->auto()
                 ->save($filenameTarget);
 

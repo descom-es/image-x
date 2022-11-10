@@ -37,7 +37,7 @@ final class ImageX
         return $this;
     }
 
-    public function convert(string $options): static
+    public function transform(string $options): static
     {
         $options = Options::build($options);
 
