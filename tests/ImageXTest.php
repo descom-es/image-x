@@ -32,7 +32,6 @@ class ImageXTest extends TestCase
         if (is_dir($this->pathTmp)) {
             rmdir($this->pathTmp);
         }
-
     }
 
     public function testCrop()
