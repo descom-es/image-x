@@ -39,29 +39,6 @@ final class Options
             ?? null;
     }
 
-    public static function default($key, $value): void
-    {
-        $className = static::classOption($key);
-
-        if (class_exists($className)) {
-            static::$defaultsValue[$key] = $value;
-        }
-    }
-
-    public static function defaults(array $values): void
-    {
-        foreach ($values as $key => $value) {
-            static::default($key, $value);
-        }
-    }
-
-    public static function resets(): void
-    {
-        static::$defaultsValue = [
-            'backgroundColor' => '#FFFFFF',
-        ];
-    }
-
     private function decode(string $options): void
     {
         $options = explode(',', $options);
@@ -84,6 +61,6 @@ final class Options
 
     private static function classOption(string $key): string
     {
-        return 'Descom\\ImageX\\Options\\' . ucfirst($key[0]) . 'Option';
+        return 'Descom\\ImageX\\Options\\' . ucfirst($key) . 'Option';
     }
 }

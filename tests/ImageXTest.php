@@ -23,15 +23,16 @@ class ImageXTest extends TestCase
         if (! file_exists($this->pathTmp)) {
             mkdir($this->pathTmp);
         }
-
-        Options::resets();
     }
 
     public function tearDown(): void
     {
         parent::tearDown();
 
-        rmdir($this->pathTmp);
+        if (is_dir($this->pathTmp)) {
+            rmdir($this->pathTmp);
+        }
+
     }
 
     public function testCrop()
@@ -46,7 +47,7 @@ class ImageXTest extends TestCase
                 'hash' => '71af92a4e02cab38a2586fc920ccda152377835c521138f3353ee6773191db4e',
             ],
             [
-                'options' => 'w_600,h_300,b_FF0000',
+                'options' => 'w_600,h_300,bg_FF0000',
                 'hash' => 'c6ca61d44f7b1f15e45eddfa14e013720e0f4f971c440c2ddfd9acda3db6143f',
             ],
         ];

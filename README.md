@@ -20,7 +20,7 @@ composer require descom/image-x
 use Descom\ImageX\ImageX;
 
 return ImageX::from($filename)
-    ->convert('w_200,h_200,b_000000')
+    ->convert('w_200,h_200,bg_000000')
     ->auto() // Auto format to image; webp, jpg
     ->response(); // ->save($otherFilename);
 ```
