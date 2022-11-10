@@ -2,7 +2,7 @@
 
 namespace Descom\ImageX\Formats;
 
-final class WebpFormat extends Format implements FormatContract
+final class WebpFormat extends Format
 {
     protected string $mimeTypes = 'image/webp';
 

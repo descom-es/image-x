@@ -3,7 +3,7 @@
 namespace Descom\ImageX;
 
 use Descom\ImageX\Formats\Auto;
-use Descom\ImageX\Formats\FormatContract;
+use Descom\ImageX\Formats\Format;
 use Descom\ImageX\Formats\JpgFormat;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
@@ -12,7 +12,7 @@ final class ImageX
 {
     private Image $image;
 
-    private ?FormatContract $format = null;
+    private ?Format $format = null;
 
     private function __construct()
     {

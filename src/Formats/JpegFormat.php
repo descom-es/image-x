@@ -2,7 +2,7 @@
 
 namespace Descom\ImageX\Formats;
 
-final class JpgFormat extends Format implements FormatContract
+final class JpgFormat extends Format
 {
     protected string $mimeTypes = 'image/jpeg';
     protected string $gdInfoKey = 'JPEG Support';

@@ -2,7 +2,7 @@
 
 namespace Descom\ImageX\Http;
 
-class Header
+final class Header
 {
     private array $headers = [];
 

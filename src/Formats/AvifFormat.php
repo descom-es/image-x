@@ -2,7 +2,7 @@
 
 namespace Descom\ImageX\Formats;
 
-final class AvifFormat extends Format implements FormatContract
+final class AvifFormat extends Format
 {
     protected string $mimeTypes = 'image/avif';
 
