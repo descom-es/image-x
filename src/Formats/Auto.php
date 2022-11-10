@@ -6,11 +6,11 @@ final class Auto
 {
     public static function detect(): Format
     {
-        $format = new AvifFormat();
+        // $format = new AvifFormat();
 
-        if ($format->isSupported()) {
-            return new AvifFormat();
-        }
+        // if ($format->isSupported()) {
+        //     return new AvifFormat();
+        // }
 
         $format = new WebpFormat();
 
