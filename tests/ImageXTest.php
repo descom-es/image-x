@@ -31,7 +31,7 @@ class ImageXTest extends TestCase
     {
         parent::tearDown();
 
-        // rmdir($this->pathTmp);
+        rmdir($this->pathTmp);
     }
 
     public function testCrop()
@@ -54,7 +54,7 @@ class ImageXTest extends TestCase
         foreach ($batchTesting as $testing) {
             $filenameTarget = $this->pathTmp.'/'.str_replace(',', '', $testing['options']).'.jpg';
 
-            ImageX::source($this->origen)
+            ImageX::from($this->origen)
                 ->convert($testing['options'])
                 ->save($filenameTarget);
 
@@ -93,7 +93,7 @@ class ImageXTest extends TestCase
 
             $filenameTarget = $this->pathTmp.'/'.str_replace(',', '', $testing['options']).'.jpg';
 
-            ImageX::source($this->origen)
+            ImageX::from($this->origen)
                 ->convert($testing['options'])
                 ->auto()
                 ->save($filenameTarget);

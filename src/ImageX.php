@@ -19,17 +19,7 @@ final class ImageX
         $this->format = new JpgFormat();
     }
 
-    public static function default($key, $value): void
-    {
-        Options::default($key, $value);
-    }
-
-    public static function defaults(array $values): void
-    {
-        Options::defaults($values);
-    }
-
-    public static function source(string $path): self
+    public static function from(string $path): self
     {
         $imageManager = new ImageManager(['driver' => 'gd']);
 

@@ -19,18 +19,9 @@ composer require descom/package_name
 ```php
 use Descom\ImageX\ImageX;
 
-// Optional
-ImageX::defaults([
-    'width' => 100, // Default null, original width
-    'height' => 100, // Default null, original height
-    'backgroundColor' => 'F5F5F5', // Default FFFFFF
-]);
-
-$imageX = new ImageX();
-
-return ImageX::source($filename)
+return ImageX::from($filename)
     ->convert('w_200,h_200,b_000000')
-    ->auto() // Auto format to image; avif, webp, jpg
+    ->auto() // Auto format to image; webp, jpg
     ->response(); // ->save($otherFilename);
 ```
 
