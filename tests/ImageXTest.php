@@ -79,13 +79,13 @@ class ImageXTest extends TestCase
                     'accept' => 'image/webp',
                 ],
             ],
-            [
-                'options' => 'w_300,h_400,avif',
-                'mime' => 'image/avif',
-                'headers' => [
-                    'accept' => 'image/avif',
-                ],
-            ],
+            // [
+            //     'options' => 'w_300,h_400,avif',
+            //     'mime' => 'image/avif',
+            //     'headers' => [
+            //         'accept' => 'image/avif',
+            //     ],
+            // ],
         ];
 
         foreach ($batchTesting as $testing) {
