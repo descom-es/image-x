@@ -19,9 +19,9 @@ final class ImageX
         $this->format = new JpgFormat();
     }
 
-    public static function from(string $path): self
+    public static function from(string $path, string $driver = 'gd'): self
     {
-        $imageManager = new ImageManager(['driver' => 'gd']);
+        $imageManager = new ImageManager(['driver' => $driver]);
 
         $self = new self();
 
