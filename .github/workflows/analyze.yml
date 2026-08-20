@@ -1,38 +1,32 @@
-name: Analyse
+name: analyze
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+      paths:
+          - '**.php'
+          - 'phpstan.neon.dist'
+          - '.github/workflows/phpstan.yml'
 
 jobs:
   phpstan:
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.4
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.3
 
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v5
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-8.4-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            ${{ runner.os }}-php-8.4-
+    - name: Install composer dependencies
+      uses: ramsey/composer-install@v4
 
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: |
-          composer install --no-interaction --no-progress
-          composer dump
+    - name: Install larastan
+      run: |
+        composer require "larastan/larastan" --no-interaction --no-update
+        composer update --prefer-dist --no-interaction
 
-      - name: Run analyse phpstan
-        run: vendor/bin/phpstan analyse --error-format github
+    - name: Run analyse phpstan
+      run: vendor/bin/phpstan analyse --error-format github

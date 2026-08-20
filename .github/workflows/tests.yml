@@ -2,9 +2,12 @@ name: Tests
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    branches: [main]
+    paths:
+      - '**.php'
+      - 'phpunit.xml.dist'
+      - 'composer.json'
+      - '.github/workflows/tests.yml'
 
 jobs:
   phpunit:

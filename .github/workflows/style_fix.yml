@@ -2,40 +2,23 @@ name: Style fix
 
 on:
   push:
-    branches: [master]
+    paths:
+      - '**.php'
+      - '.github/workflows/lint.yml'
 
 jobs:
-  style-fix:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.4
+          php-version: 8.5
+          tools: pint
 
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v5
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-8.4-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            ${{ runner.os }}-php-8.4-
-
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: |
-          composer install --no-interaction --no-progress
-          composer dump
-
-      - name: Fix styles
-        run: vendor/bin/php-cs-fixer fix
-
-      - name: Run style
-        run: vendor/bin/php-cs-fixer fix --dry-run --diff --format junit
-
-      - uses: EndBug/add-and-commit@v10
+      - name: Run Pint
+        run: pint --test
