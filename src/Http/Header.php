@@ -41,7 +41,24 @@ final class Header
             return static::$fakeHeaders;
         }
 
-        return getallheaders();
+        if (function_exists('getallheaders')) {
+            return getallheaders();
+        }
+
+        return $this->headersFromServer();
+    }
+
+    private function headersFromServer(): array
+    {
+        $headers = [];
+
+        foreach ($_SERVER as $key => $value) {
+            if (str_starts_with($key, 'HTTP_')) {
+                $headers[str_replace('_', '-', substr($key, 5))] = $value;
+            }
+        }
+
+        return $headers;
     }
 
     private function normalizeKey(string $key): string

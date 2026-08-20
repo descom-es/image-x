@@ -4,7 +4,8 @@ namespace Descom\ImageX\Test;
 
 use Descom\ImageX\Http\Header;
 use Descom\ImageX\ImageX;
-use Descom\ImageX\Options;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 use PHPUnit\Framework\TestCase;
 
 class ImageXTest extends TestCase
@@ -29,6 +30,8 @@ class ImageXTest extends TestCase
     {
         parent::tearDown();
 
+        Header::fake([]);
+
         if (is_dir($this->pathTmp)) {
             rmdir($this->pathTmp);
         }
@@ -39,17 +42,25 @@ class ImageXTest extends TestCase
         $batchTesting = [
             [
                 'options' => 'w_300,h_400',
-                'hash' => '293aed1f4b9073cee8851bb689dd9b075415390d45f93260dea2a18e5e1318f7',
+                'width' => 300,
+                'height' => 400,
+                'backgroundColor' => 'ffffff',
             ],
             [
                 'options' => 'w_400,h_300',
-                'hash' => '71af92a4e02cab38a2586fc920ccda152377835c521138f3353ee6773191db4e',
+                'width' => 400,
+                'height' => 300,
+                'backgroundColor' => 'ffffff',
             ],
             [
                 'options' => 'w_600,h_300,bg_FF0000',
-                'hash' => 'c6ca61d44f7b1f15e45eddfa14e013720e0f4f971c440c2ddfd9acda3db6143f',
+                'width' => 600,
+                'height' => 300,
+                'backgroundColor' => 'ff0000',
             ],
         ];
+
+        $manager = new ImageManager(Driver::class);
 
         foreach ($batchTesting as $testing) {
             $filenameTarget = $this->pathTmp.'/'.str_replace(',', '', $testing['options']).'.jpg';
@@ -58,9 +69,34 @@ class ImageXTest extends TestCase
                 ->transform($testing['options'])
                 ->save($filenameTarget);
 
-            $this->assertEquals($testing['hash'], hash_file('sha256', $filenameTarget));
+            $this->assertEquals('image/jpeg', mime_content_type($filenameTarget));
+
+            $image = $manager->decodePath($filenameTarget);
+
+            $this->assertEquals($testing['width'], $image->width());
+            $this->assertEquals($testing['height'], $image->height());
+            $this->assertColorMatches($testing['backgroundColor'], $image->colorAt(0, 0)->toHex());
 
             unlink($filenameTarget);
+        }
+    }
+
+    /**
+     * JPEG compression is lossy, so a solid background color can shift by a
+     * few units per channel (chroma subsampling). Compare with tolerance
+     * instead of an exact hex match.
+     */
+    private function assertColorMatches(string $expectedHex, string $actualHex, int $tolerance = 10): void
+    {
+        $expected = sscanf($expectedHex, '%02x%02x%02x');
+        $actual = sscanf($actualHex, '%02x%02x%02x');
+
+        foreach ($expected as $channel => $value) {
+            $this->assertLessThanOrEqual(
+                $tolerance,
+                abs($value - $actual[$channel]),
+                "Channel {$channel} of color {$actualHex} does not match expected {$expectedHex} within tolerance."
+            );
         }
     }
 

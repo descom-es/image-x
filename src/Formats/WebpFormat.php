@@ -2,6 +2,8 @@
 
 namespace Descom\ImageX\Formats;
 
+use Intervention\Image\Format as InterventionFormat;
+
 final class WebpFormat extends Format
 {
     protected string $mimeTypes = 'image/webp';
@@ -11,5 +13,10 @@ final class WebpFormat extends Format
     public function extension(): string
     {
         return 'webp';
+    }
+
+    public function interventionFormat(): InterventionFormat
+    {
+        return InterventionFormat::WEBP;
     }
 }
