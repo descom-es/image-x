@@ -9,6 +9,7 @@ use Intervention\Image\Interfaces\EncoderInterface;
 abstract class Format
 {
     protected string $mimeTypes = 'image/unknown';
+
     protected string $gdInfoKey = 'unknown';
 
     abstract public function extension(): string;
@@ -32,7 +33,7 @@ abstract class Format
 
     protected function isBrowserSupported(): bool
     {
-        $headers = new Header();
+        $headers = new Header;
 
         $accept = $headers->get('accept', '');
 

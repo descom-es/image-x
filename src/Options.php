@@ -28,7 +28,7 @@ final class Options
     }
 
     /**
-     * @param string $options  sample: w_300,h_400,bg_#000000
+     * @param  string  $options  sample: w_300,h_400,bg_#000000
      */
     public static function build(string $options): self
     {
@@ -41,7 +41,7 @@ final class Options
             return $this->options[$option]->value;
         }
 
-        return  null;
+        return null;
     }
 
     private function initialize(array $options)
@@ -50,7 +50,6 @@ final class Options
             $optionClass = isset($options[$key])
                 ? new $className($options[$key])
                 : new $className(null);
-
 
             $this->options[$key] = $optionClass;
         }

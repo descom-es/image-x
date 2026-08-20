@@ -37,8 +37,8 @@ final class Header
 
     private function headers(): array
     {
-        if (static::$fakeHeaders) {
-            return static::$fakeHeaders;
+        if (self::$fakeHeaders) {
+            return self::$fakeHeaders;
         }
 
         if (function_exists('getallheaders')) {

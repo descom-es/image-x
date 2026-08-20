@@ -7,12 +7,12 @@ use PHPUnit\Framework\TestCase;
 
 class OptionsTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
     }
 
-    public function testOptionWidth()
+    public function test_option_width()
     {
         $options = Options::build('w_300');
 
@@ -21,7 +21,7 @@ class OptionsTest extends TestCase
         $this->assertEquals('#FFFFFF', $options->backgroundColor);
     }
 
-    public function testOptionHeight()
+    public function test_option_height()
     {
         $options = Options::build('h_800');
 
@@ -30,7 +30,7 @@ class OptionsTest extends TestCase
         $this->assertEquals('#FFFFFF', $options->backgroundColor);
     }
 
-    public function testOptionBackgroundColor()
+    public function test_option_background_color()
     {
         $options = Options::build('bg_F00');
 

@@ -11,7 +11,9 @@ use Closure;
 abstract class Option
 {
     protected string $name = '';
+
     protected mixed $value = null;
+
     protected static ?Closure $defaultValue = null;
 
     public function __get($name): mixed

@@ -23,14 +23,14 @@ final class ImageX
 
     private function __construct()
     {
-        $this->format = new JpgFormat();
+        $this->format = new JpgFormat;
     }
 
     public static function from(string $path, string $driver = 'gd'): self
     {
         $imageManager = new ImageManager(self::resolveDriver($driver));
 
-        $self = new self();
+        $self = new self;
 
         $self->image = $imageManager->decodePath($path);
 
@@ -39,7 +39,7 @@ final class ImageX
 
     public function auto(): self
     {
-        $this->format = (new Auto())->detect();
+        $this->format = (new Auto)->detect();
 
         return $this;
     }

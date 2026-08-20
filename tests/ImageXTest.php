@@ -11,9 +11,10 @@ use PHPUnit\Framework\TestCase;
 class ImageXTest extends TestCase
 {
     private string $origen;
+
     private string $pathTmp;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -26,7 +27,7 @@ class ImageXTest extends TestCase
         }
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         parent::tearDown();
 
@@ -37,7 +38,7 @@ class ImageXTest extends TestCase
         }
     }
 
-    public function testCrop()
+    public function test_crop()
     {
         $batchTesting = [
             [
@@ -100,7 +101,7 @@ class ImageXTest extends TestCase
         }
     }
 
-    public function testFormatAuto()
+    public function test_format_auto()
     {
         $batchTesting = [
             [

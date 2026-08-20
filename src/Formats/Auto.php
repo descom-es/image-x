@@ -12,12 +12,12 @@ final class Auto
         //     return new AvifFormat();
         // }
 
-        $format = new WebpFormat();
+        $format = new WebpFormat;
 
         if ($format->isSupported()) {
-            return new WebpFormat();
+            return new WebpFormat;
         }
 
-        return new JpgFormat();
+        return new JpgFormat;
     }
 }

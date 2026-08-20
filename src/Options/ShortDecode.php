@@ -12,7 +12,7 @@ class ShortDecode
 
     public static function options(string $options): array
     {
-        $self = new self();
+        $self = new self;
 
         return $self->decodeString($options);
     }

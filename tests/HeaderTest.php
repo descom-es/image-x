@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class HeaderTest extends TestCase
 {
-    public function testHHeader()
+    public function test_h_header()
     {
         $batchTesting = [
             'accept' => '123456789',
@@ -17,7 +17,7 @@ class HeaderTest extends TestCase
         foreach ($batchTesting as $key => $value) {
             Header::fake([$key => $value]);
 
-            $header = new Header();
+            $header = new Header;
 
             $this->assertEquals($value, $header->get('accept'));
         }

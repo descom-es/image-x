@@ -7,6 +7,7 @@ use Intervention\Image\Format as InterventionFormat;
 final class JpgFormat extends Format
 {
     protected string $mimeTypes = 'image/jpg';
+
     protected string $gdInfoKey = 'JPEG Support';
 
     public function extension(): string
