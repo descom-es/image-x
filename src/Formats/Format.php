@@ -3,6 +3,8 @@
 namespace Descom\ImageX\Formats;
 
 use Descom\ImageX\Http\Header;
+use Intervention\Image\Format as InterventionFormat;
+use Intervention\Image\Interfaces\EncoderInterface;
 
 abstract class Format
 {
@@ -10,6 +12,13 @@ abstract class Format
     protected string $gdInfoKey = 'unknown';
 
     abstract public function extension(): string;
+
+    abstract public function interventionFormat(): InterventionFormat;
+
+    public function encoder(int $quality): EncoderInterface
+    {
+        return $this->interventionFormat()->encoder(quality: $quality);
+    }
 
     public function isSupported(): bool
     {

@@ -4,7 +4,9 @@
     "type": "library",
     "require": {
         "php": "^8.4",
-        "intervention/image": "^2.7"
+        "ext-fileinfo": "*",
+        "ext-gd": "*",
+        "intervention/image": "^4.2"
     },
     "homepage": "https://github.com/descom-es/image-x",
     "license": "MIT",

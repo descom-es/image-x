@@ -4,4 +4,5 @@
 /.php_cs.cache
 /.phpunit.result.cache
 /.php-cs-fixer.cache
+/.phpunit.cache
 /tests/stubs/tmp
