@@ -51,6 +51,17 @@ final class ImageX
         return $this->resize($options);
     }
 
+    /**
+     * Scale the image down so that neither side exceeds the given size,
+     * keeping the aspect ratio. Smaller images are left untouched.
+     */
+    public function limit(int $maxSize): static
+    {
+        $this->image = $this->image->scaleDown($maxSize, $maxSize);
+
+        return $this;
+    }
+
     public function response(): mixed
     {
         return Response::make($this->encode());

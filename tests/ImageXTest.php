@@ -82,6 +82,38 @@ class ImageXTest extends TestCase
         }
     }
 
+    public function test_limit()
+    {
+        $batchTesting = [
+            // The stub is 500x500.
+            ['transform' => null, 'limit' => 200, 'width' => 200, 'height' => 200],
+            ['transform' => null, 'limit' => 1000, 'width' => 500, 'height' => 500],
+            ['transform' => 'w_600,h_300', 'limit' => 300, 'width' => 300, 'height' => 150],
+            ['transform' => 'w_300,h_600', 'limit' => 300, 'width' => 150, 'height' => 300],
+        ];
+
+        $manager = new ImageManager(Driver::class);
+
+        foreach ($batchTesting as $testing) {
+            $filenameTarget = $this->pathTmp.'/limit.jpg';
+
+            $image = ImageX::from($this->origen);
+
+            if ($testing['transform'] !== null) {
+                $image->transform($testing['transform']);
+            }
+
+            $image->limit($testing['limit'])->save($filenameTarget);
+
+            $result = $manager->decodePath($filenameTarget);
+
+            $this->assertEquals($testing['width'], $result->width());
+            $this->assertEquals($testing['height'], $result->height());
+
+            unlink($filenameTarget);
+        }
+    }
+
     /**
      * JPEG compression is lossy, so a solid background color can shift by a
      * few units per channel (chroma subsampling). Compare with tolerance
